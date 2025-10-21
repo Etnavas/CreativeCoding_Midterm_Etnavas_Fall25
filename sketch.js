@@ -13,6 +13,8 @@ Must include:
 • arrays
 • conditionals
 • OOP - with methods + passing parameters
+
+sound activated/synced lights (?) might be too much ngl
 */
 
 function setup() {
