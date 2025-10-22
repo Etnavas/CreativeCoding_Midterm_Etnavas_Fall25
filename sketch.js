@@ -1,7 +1,10 @@
 /*
 Word is Mellow
+
 colorfull night lights that change slowly transitioning into different colors 
 peacefull music maybe?? piano, melodic perciusion perhaps (i can't spell lol)
+ 
+maybe something related to the mouse possition (?)
 
 Must include: 
 • heavy use of variables custom functions passing variables as parameter
@@ -14,7 +17,6 @@ Must include:
 • conditionals
 • OOP - with methods + passing parameters
 
-sound activated/synced lights (?) might be too much ngl
 */
 
 function setup() {
