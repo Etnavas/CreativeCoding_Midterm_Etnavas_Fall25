@@ -1,6 +1,4 @@
 
-//how can I incorporate millis? 
-
 
 class Particles {
 
@@ -27,9 +25,9 @@ class Particles {
         ellipse(this.x, this.y, this.size);
     }
     
-    //maybe I should use an update function?
-    //fadding overtime?
-    //how can I incorporate millis? 
+     //how can I incorporate millis? 
+    //maybe I should use an update function or a loop to decrease alpha value overtime (?)
+
 
    
 }

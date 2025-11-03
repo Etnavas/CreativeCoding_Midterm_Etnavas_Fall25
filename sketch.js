@@ -2,7 +2,7 @@
 Word is "redacted"
 
 colorfull night lights that change slowly transitioning into different colors 
-maybe something related to the mouse possition (?)
+something that changes overtime
 
 Must include: 
 • heavy use of variables custom functions passing variables as parameter
