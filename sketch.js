@@ -1,9 +1,7 @@
 /*
-Word is Mellow
+Word is "redacted"
 
 colorfull night lights that change slowly transitioning into different colors 
-peacefull music maybe?? piano, melodic perciusion perhaps (i can't spell lol)
- 
 maybe something related to the mouse possition (?)
 
 Must include: 
@@ -18,12 +16,31 @@ Must include:
 • OOP - with methods + passing parameters
 
 */
+let circles = [];
+let x, y;
 
 function setup() {
   createCanvas(800, 800);
+  noStroke();
+  x = width / 2;
+  y = height / 2;
+
+  // Create a bunch of circles with random properties
+  // as long as i is less than 40 create a new Particle and add it to the circles array
+  for (let i = 0; i < 40; i++) {  // 40 places in my array technically 39
+    circles.push(new Particles()); // Particles() creates new Particle object circles.push pushes it into the end of thearray
+    
+  }
+
 }
 
 function draw() {
-  background(0);
+
+  background(10, 10, 25, 30); //background has less transparency to leave a faither trail 
+
+  for (let i = 0; i < circles.length; i++) { //goes through every object in the circles array and displays it
+    circles[i].display();
+  }
+
 }
 
