@@ -17,7 +17,6 @@ Must include:
 
 */
 let circles = [];
-let x, y;
 
 function setup() {
   createCanvas(800, 800);
@@ -27,8 +26,8 @@ function setup() {
 
   // Create a bunch of circles with random properties
   // as long as i is less than 40 create a new Particle and add it to the circles array
-  for (let i = 0; i < 40; i++) {  // 40 places in my array technically 39
-    circles.push(new Particles()); // Particles() creates new Particle object circles.push pushes it into the end of thearray
+  for (let i = 0; i < 60; i++) {  // 60 places in my array technically 59
+    circles.push(new Particles()); // Particles() creates new Particle object circles.push pushes it into the end of the array
     
   }
 
@@ -40,6 +39,7 @@ function draw() {
 
   for (let i = 0; i < circles.length; i++) { //goes through every object in the circles array and displays it
     circles[i].display();
+    circles[i].update();
   }
 
 }
