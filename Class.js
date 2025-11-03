@@ -7,8 +7,8 @@ class Particles {
         this.y = random(height); //y value is a random canvas height number 
         this.size = random(30, 120); //size is randomly between 30 120
         this.color = color(random(100,255), random(100,255), random(200,255)); // blue value (higher range = more blue/purple) 
-        this.startTime = millis() + random (3000); // random delay before each circle starts fading
-        this.speed = 3000; //how fast it fades 
+        this.startTime = millis() + random (5000); // random delay before each circle starts fading
+        this.speed = 6000; //how fast it fades 
         this.alpha = 0; // Transparency (start invicible)
     }
     
@@ -20,7 +20,7 @@ class Particles {
       let tPassed = millis() - this.startTime;
 
       //cycle - fade in + fade out
-      let cycle = this.speed * 2; 
+      let cycle = this.speed * 3; 
 
       let r = tPassed % cycle; // "r" will always reset to 0 after a full cycle
 
