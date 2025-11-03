@@ -8,7 +8,7 @@ class Particles {
         this.size = random(30, 120); //size is randomly between 30 120
         this.color = color(random(100,255), random(100,255), random(200,255)); // blue value (higher range = more blue/purple) 
         this.startTime = millis() + random (5000); // random delay before each circle starts fading
-        this.speed = 6000; //how fast it fades 
+        this.speed = 3500; //how fast it fades 
         this.alpha = 0; // Transparency (start invicible)
     }
     

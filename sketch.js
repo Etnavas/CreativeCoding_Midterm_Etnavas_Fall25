@@ -25,8 +25,8 @@ function setup() {
   y = height / 2;
 
   // Create a bunch of circles with random properties
-  // as long as i is less than 40 create a new Particle and add it to the circles array
-  for (let i = 0; i < 60; i++) {  // 60 places in my array technically 59
+  // as long as i is less than 100 create a new Particle and add it to the circles array
+  for (let i = 0; i < 200; i++) {  // 100 places in my array technically 99
     circles.push(new Particles()); // Particles() creates new Particle object circles.push pushes it into the end of the array
     
   }
@@ -35,11 +35,14 @@ function setup() {
 
 function draw() {
 
-  background(10, 10, 25, 30); //background has less transparency to leave a faither trail 
+  //background has less transparency to leave a faither trail 
 
   for (let i = 0; i < circles.length; i++) { //goes through every object in the circles array and displays it
+  
     circles[i].display();
+    background(10, 10, 25, 20);//background has less transparency to leave a faither trail
     circles[i].update();
+     
   }
 
 }
