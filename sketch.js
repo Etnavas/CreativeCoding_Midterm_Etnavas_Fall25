@@ -26,10 +26,13 @@ function setup() {
 
   // Create a bunch of circles with random properties
   // as long as i is less than 100 create a new Particle and add it to the circles array
-  for (let i = 0; i < 200; i++) {  // 100 places in my array technically 99
-    circles.push(new Particles()); // Particles() creates new Particle object circles.push pushes it into the end of the array
+  for (let i = 0; i < 40; i++) {  // 40 places in my array technically 39 
+    circles.push(new Bubbles()); // Particles() creates new Particle object circles.push pushes it into the end of the array
     
   }
+
+ // remove objects from my array (idk if this would go on setup it may go on draw loop)
+
 
 }
 
@@ -38,10 +41,10 @@ function draw() {
   //background has less transparency to leave a faither trail 
 
   for (let i = 0; i < circles.length; i++) { //goes through every object in the circles array and displays it
-  
-    circles[i].display();
-    background(10, 10, 25, 20);//background has less transparency to leave a faither trail
     circles[i].update();
+    circles[i].display();
+    background(10, 10, 25, 20);//background has less transparency to leave a fainter trail
+    //circles[i].update();
      
   }
 
