@@ -1,150 +1,79 @@
-
-
-// class Bubbles {
-
-//     constructor(x,y,s) {
-//         this.x = x;//x value is a random canvas width number 
-//         this.y = y; //y value is a random canvas height number 
-//         this.size = s;//size is randomly between 30 120
-//         this.color = color(random(100,255), random(100,255), random(200,255)); // blue value (higher range = more blue/purple) 
-//         this.startTime = millis() + random (5000); // random delay before each circle starts fading
-//         this.speed = 3500; //how fast it fades and out
-//         this.alpha = 0; // Transparency (start invicible)
-//     }
-    
-
-//      Update function
-//     update () {
-      
-//         // time passed / how long is it been active? 
-//       let tPassed = millis() - this.startTime;
-
-//       //cycle - fade in + fade out
-//       let cycle = this.speed * 3; 
-
-//       let r = tPassed % cycle; // "r" will always reset to 0 after a full cycle
-
-//       //repetition 
-
-      
-//       //fade in is only works when the sketch is first running FIX THAT 
-
-//       //fade in
-//       if ( tPassed < this.speed) {
-//         this.alpha = map (r, 0, this.speed, 0, 255 ) // the value of r is mapped into a range between 0 & 255
-
-
-//       } 
-//       //fade out
-//       else {
-//         this.alpha = map (r, this.speed, cycle, 255, 0 ); // the value of r is mapped into a range between 255 & 0
-
-//       }
-
-//     }
-
-//     //Maybe bubbles could slowly move around the screen before fading 
-//     // I would need each bubble to start at a random point and slowly change each of the x and y values of each object in my array
-//     // I could use random() and give each one a small range for their movement but I would need to find a way for each to have their own range based of their initial possition 
-
-
-//     display () {
-        
-//         fill(red(this.color), green(this.color), blue(this.color), this.alpha);
-//         ellipse(this.x, this.y, this.size);
-//     }
-//     conatains(px,py){
-//       let d = dist(px,py,this.x,this.y);
-//       return d < this.size;
-//     }
-    
-//    /*
-
-//     //maybe this can be under update? 
-//     function pop () {
-
-//       // if circles are pressed then they will pop like bubbles 
-//       let value = 0 
-  
-//       function doubleClicked() {
-//         // how can I specify which object and apply that to each object in my array? 
-  
-//       }
-    
-//     }
-   
-//    */
-
-
-   
-// }
-
 class Bubbles {
 
-  constructor(x, y, s) {
-    this.x = x;
-    this.y = y;
-    this.size = s;
+  constructor() {
+    /*
+    this.x = random(width);
+    this.y = random(height);
+    this.size = random(30, 120);
     this.color = color(random(100, 255), random(100, 255), random(200, 255));
     this.startTime = millis() + random(5000);
     this.speed = 3500;
     this.alpha = 0;
+    this.state = "appearing";  
+    */
+    this.respawn(); //intial parameters stuff 
+    //this.state = "appearingAtStart"; //bubbles fade in at the beginning
+  }
+
+  respawn() { //create new bubble with new random properties
+
+    this.x = random(width);  //x value is a random canvas width number 
+    this.y = random(height); //y value is a random canvas height number 
+    this.size = random(30, 120); //size is randomly between 30 120
+    this.color = color(random(100, 255), random(100, 255), random(200, 255)); // blue value (higher range = more blue/purple) 
+    this.startTime = millis() + random(5000); // random delay before each circle starts fading
+    this.alpha = 0; // Transparency (start invicible)
+    this.state = "appearing";  //different bubble states  
+    this.popSize = 0;  // extra size during popping face
+    //floating velocity
+    this.dx = random(-0.1, 0.1);
+    this.dy = random(-0.1, 0.1);
+
+
   }
   
   update () {
       
-    //         // time passed / how long is it been active? 
-       let tPassed = millis() - this.startTime;
-    
-       //cycle - fade in + fade out
-           let cycle = this.speed * 3; 
+   //bubble movement
+   this.x += this.dx;
+   this.y += this.dy;
 
-        let r = tPassed % cycle; // "r" will always reset to 0 after a full cycle
-    
-    //       //repetition 
-    
-          
-    //       //fade in is only works when the sketch is first running FIX THAT 
-    
-    //       //fade in
-           if ( tPassed < this.speed) {
-            this.alpha = map (r, 0, this.speed, 0, 255 ) // the value of r is mapped into a range between 0 & 255
-    
-    
-          } 
-          //fade out
-          else {
-             this.alpha = map (r, this.speed, cycle, 255, 0 ); // the value of r is mapped into a range between 255 & 0
-    
-           }
-    
-         }
+   let s = this.size/2 //radius of bubble
 
-
-
-  /*
-  update() {
-    this.x+=1;
-  }
-
-  fade(){
-    let tPassed = millis() - this.startTime;
-    let cycle = this.speed * 2;
-    let r = tPassed % cycle;
-
-    // fade in
-    if (r < this.speed) {
-      this.alpha = map(r, 0, this.speed, 0, 255);
-    } else {
-      // fade out
-      this.alpha = map(r, this.speed, cycle, 255, 0);
+    // bounce off edges
+    if (this.x < s || this.x > width - s) {
+      this.dx *= -1;
     }
-  }
 
-  */
+    if (this.y < s || this.y > height - s) {
+      this.dy *= -1;
+    } 
+     
+    //appearing state
+    if (this.state === "appearing") {
+      this.alpha += 3;          // fade-in speed
+      if (this.alpha >= 255) {
+        this.alpha = 255;
+        this.state = "visible"; //bubble stays visible
+      }
+    }
+         
+    // popping state
+    if (this.state === "popping") {
+      this.alpha -= 8;          //fade-out speed
+      this.popSize += 2;        // bigger size for pop
+      if (this.alpha <= 0) {     
+        this.alpha = 0;
+        this.popSize = 0;
+        this.respawn();      //when fully faded make new one
+      }
+    }
+          
+  }
+  
   display() {
     fill(red(this.color), green(this.color), blue(this.color), this.alpha);
-    ellipse(this.x, this.y, this.size);
+    ellipse(this.x, this.y, this.size + this.popSize);
   }
 
   // <-- fixed name + fixed radius math
